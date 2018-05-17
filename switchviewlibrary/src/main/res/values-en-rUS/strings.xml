@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">SwitchViewLibrary</string>
-    <string name="off">关闭</string>
-    <string name="on">打开</string>
+    <string name="off">Off</string>
+    <string name="on">On</string>
 </resources>

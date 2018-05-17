@@ -12,6 +12,7 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -34,12 +35,15 @@ public class SwitchView extends View {
 
     private float mThumbStartX;
 
-    private String mText = "打开";
+    private String mText;
 
     private Rect mTextBound;
 
     private int mTextX;
     private int mTextY;
+
+    private String mTextOn; // 打开是文字
+    private String mTextOff; // 关闭文字
 
     private int mBgColor;
     private int mThumbColor;
@@ -82,6 +86,9 @@ public class SwitchView extends View {
         mBgColor = ta.getColor(R.styleable.SwitchView_bgcolor, Color.GRAY);
         mThumbColor = ta.getColor(R.styleable.SwitchView_thumbcolor, Color.LTGRAY);
         mTextColor = ta.getColor(R.styleable.SwitchView_textcolor, Color.WHITE);
+        mTextOff = ta.getString(R.styleable.SwitchView_off);
+        mTextOn = ta.getString(R.styleable.SwitchView_on);
+        Log.d("chengdh", "On: " + mTextOn + ", oFF: " + mTextOff);
         ta.recycle();
 
         mWidth = 200;//DensityUtil.px2dip(context, 150);
@@ -142,13 +149,19 @@ public class SwitchView extends View {
 
     private void changeTextStatus() {
         if (mCurrStatus == Status.ON) { // 如果是off状态
-            mText = "关闭";
+            if (mTextOff == null) {
+                mTextOff = getResources().getString(R.string.off);
+            }
+            mText = mTextOff;
             mTextPaint.getTextBounds(mText, 0, mText.length(), mTextBound);
-            mTextX = mTextBound.width() / 6;
+            mTextX = (mWidth - mThumbR * 2 - mTextBound.width()) / 2;
         } else {
-            mText = "打开";
+            if (mTextOn == null) {
+                mTextOn = getResources().getString(R.string.on);
+            }
+            mText = mTextOn;
             mTextPaint.getTextBounds(mText, 0, mText.length(), mTextBound);
-            mTextX = mThumbR * 2 + mTextBound.width() / 8;
+            mTextX = mThumbR * 2 + (mWidth - mThumbR * 2 - mTextBound.width()) / 2;
         }
     }
 
