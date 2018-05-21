@@ -21,12 +21,24 @@ Add it in your root build.gradle at the end of repositories:
 Step 2. Add the dependency
 
 	dependencies {
-	        implementation 'com.github.chengdahong:SwitchView:V1.0.1'						    
+	        implementation 'com.github.chengdahong:SwitchView:V1.0.2'						    
 	}
 	
 	
 2018-05-17 14:48 更新
+
 发布v1.0.1版本
+
 更改内容:
+
 1.添加动态设置on、off文字功能
+
 2.解决文字居中问题
+
+2018-05-21 09:22 更新
+
+发布v1.0.2版本
+
+更改内容：
+
+1.添加滑块颜色属性
