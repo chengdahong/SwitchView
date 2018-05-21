@@ -47,6 +47,7 @@ public class SwitchView extends View {
 
     private int mBgColor;
     private int mThumbColor;
+    private int mThumbOffColor;
     private int mTextColor;
 
     private Status mCurrStatus = Status.OFF;
@@ -85,6 +86,7 @@ public class SwitchView extends View {
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.SwitchView);
         mBgColor = ta.getColor(R.styleable.SwitchView_bgcolor, Color.GRAY);
         mThumbColor = ta.getColor(R.styleable.SwitchView_thumbcolor, Color.LTGRAY);
+        mThumbOffColor = ta.getColor(R.styleable.SwitchView_thumboffcolor, Color.LTGRAY);
         mTextColor = ta.getColor(R.styleable.SwitchView_textcolor, Color.WHITE);
         mTextOff = ta.getString(R.styleable.SwitchView_off);
         mTextOn = ta.getString(R.styleable.SwitchView_on);
@@ -103,7 +105,7 @@ public class SwitchView extends View {
         mBgPaint.setAntiAlias(true);
 
         mThumbPaint = new Paint();
-        mThumbPaint.setColor(mThumbColor);
+        mThumbPaint.setColor(mThumbOffColor);
         mThumbPaint.setAntiAlias(true);
 
         int textSize = mHeight * 2 / 5;
@@ -136,6 +138,7 @@ public class SwitchView extends View {
                 super.onAnimationEnd(animation);
                 mIsChanging = false;
                 changeTextStatus();
+                changeThumbColor();
                 if (null != mListener) {
                     if (mCurrStatus == Status.OFF) {
                         mListener.onCheckedChanged(SwitchView.this, false);
@@ -145,6 +148,14 @@ public class SwitchView extends View {
                 }
             }
         });
+    }
+
+    private void changeThumbColor() {
+        if (mCurrStatus == Status.ON) {
+            mThumbPaint.setColor(mThumbColor);
+        } else {
+            mThumbPaint.setColor(mThumbOffColor);// 如果是off状态
+        }
     }
 
     private void changeTextStatus() {

@@ -11,6 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:bgcolor="@color/colorGray"
-        app:thumbcolor="@color/colorYellow"
+        app:thumbcolor="@color/colorGreen"
+        app:thumboffcolor="@color/colorLGray"
         />
 </android.support.constraint.ConstraintLayout>
